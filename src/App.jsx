@@ -2,13 +2,13 @@ import React, { useState, useRef } from 'react';
 import { motion, useSpring, useTransform } from 'framer-motion';
 import { Star, Instagram, Phone, MapPin } from 'lucide-react';
 
-// Import des images depuis public/
-import imgAvant from '../public/img.png';
-import imgApres from '../public/img_1.png';
-import logoImg from '../public/logo.png';
-import lashExtImg from '../public/lashext.png';
-import lashLiftImg from '../public/lashlift.png';
-import lashBrowsImg from '../public/lashbrows.png';
+// Import des images - Vite les résoudra automatiquement
+const imgAvant = new URL('../public/img.png', import.meta.url).href;
+const imgApres = new URL('../public/img_1.png', import.meta.url).href;
+const logoImg = new URL('../public/logo.png', import.meta.url).href;
+const lashExtImg = new URL('../public/lashext.png', import.meta.url).href;
+const lashLiftImg = new URL('../public/lashlift.png', import.meta.url).href;
+const lashBrowsImg = new URL('../public/lashbrows.png', import.meta.url).href;
 
 // ============================================
 // COMPOSANT: MagneticButton
