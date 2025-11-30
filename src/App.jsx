@@ -1,6 +1,14 @@
 import React, { useState, useRef } from 'react';
 import { motion, useSpring, useTransform } from 'framer-motion';
-import { Sparkles, Star, Instagram, Phone, MapPin } from 'lucide-react';
+import { Star, Instagram, Phone, MapPin } from 'lucide-react';
+
+// Import des images depuis public/
+import imgAvant from '/img.png';
+import imgApres from '/img_1.png';
+import logoImg from '/logo.png';
+import lashExtImg from '/lashext.png';
+import lashLiftImg from '/lashlift.png';
+import lashBrowsImg from '/lashbrows.png';
 
 // ============================================
 // COMPOSANT: MagneticButton
@@ -120,7 +128,7 @@ const ComparisonSlider = () => {
     >{/* Image Avant - fond (toujours visible) */}
       <div className="absolute inset-0 z-0 bg-neutral-100">
         <img
-          src="/img.png"
+          src={imgAvant}
           alt="Avant"
           className="w-full h-full object-cover"
           style={{ objectPosition: 'center center' }}
@@ -133,7 +141,7 @@ const ComparisonSlider = () => {
         style={{ width: useTransform(animatedPosition, (pos) => `${pos}%`) }}
       >
         <img
-          src="/img_1.png"
+          src={imgApres}
           alt="Après"
           className="w-full h-full object-cover"
           style={{ objectPosition: 'center center' }}
@@ -238,7 +246,7 @@ const MorphingImage = () => {
       }}
     >
       <motion.img
-        src="/logo.png"
+        src={logoImg}
         alt="Extensions de cils luxueuses"
         className="w-full h-full object-cover"
         animate={{
@@ -281,9 +289,8 @@ const BookingModal = ({ isOpen, onClose, defaultService = '' }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
-    // Ici on logge la réservation (remplacer par appel API si nécessaire)
-    console.log('Réservation envoyée :', Object.fromEntries(form.entries()));
-    alert('Merci — votre demande de réservation a été reçue. Nous vous contacterons.');
+    console.log('Reservering verzonden:', Object.fromEntries(form.entries()));
+    alert('Bedankt — uw reserveringsaanvraag is ontvangen. Wij nemen contact met u op.');
     onClose();
   };
 
@@ -294,22 +301,22 @@ const BookingModal = ({ isOpen, onClose, defaultService = '' }) => {
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
       <motion.div className="relative bg-white rounded-2xl shadow-2xl w-11/12 max-w-lg p-6 z-10" initial={{ y: 40, scale: 0.98 }} animate={{ y: 0, scale: 1 }} transition={{ type: 'spring', stiffness: 300, damping: 28 }} role="dialog" aria-modal="true">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="font-playfair text-xl">Réservation</h3>
-          <button onClick={onClose} aria-label="Fermer la fenêtre" className="text-matte-black/60">✕</button>
+          <h3 className="font-playfair text-xl">Reservering</h3>
+          <button onClick={onClose} aria-label="Sluit venster" className="text-matte-black/60">✕</button>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input ref={nameRef} name="name" required placeholder="Votre nom" className="w-full p-3 rounded-md border" />
-          <input name="phone" required placeholder="Téléphone" className="w-full p-3 rounded-md border" />
+          <input ref={nameRef} name="name" required placeholder="Uw naam" className="w-full p-3 rounded-md border" />
+          <input name="phone" required placeholder="Telefoon" className="w-full p-3 rounded-md border" />
           <select name="service" defaultValue={defaultService || 'Lash extensions'} className="w-full p-3 rounded-md border">
-            <option>Look Naturel</option>
+            <option>Natuurlijke Look</option>
             <option>Lash extensions</option>
             <option>Lash Lift</option>
             <option>Brows & Lashes</option>
           </select>
           <input name="date" type="date" className="w-full p-3 rounded-md border" />
           <div className="flex gap-3 justify-end">
-            <button type="button" onClick={onClose} className="px-4 py-2 rounded-md border">Annuler</button>
-            <button type="submit" className="px-4 py-2 rounded-md bg-gradient-to-r from-warm-gold to-hot-pink text-white">Envoyer</button>
+            <button type="button" onClick={onClose} className="px-4 py-2 rounded-md border">Annuleren</button>
+            <button type="submit" className="px-4 py-2 rounded-md bg-gradient-to-r from-warm-gold to-hot-pink text-white">Verzenden</button>
           </div>
         </form>
       </motion.div>
@@ -373,21 +380,21 @@ function App() {
               whileHover={{ scale: 1.1, color: '#ff69b4' }}
               transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              Services
+              Diensten
             </motion.a>
             <motion.a
               href="#transformation"
               whileHover={{ scale: 1.1, color: '#ff69b4' }}
               transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              Transformations
+              Transformaties
             </motion.a>
             <motion.a
               href="#galerie"
               whileHover={{ scale: 1.1, color: '#ff69b4' }}
               transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              Galerie
+              Galerij
             </motion.a>
             <motion.a
               href="#contact"
@@ -398,8 +405,8 @@ function App() {
             </motion.a>
           </div>
 
-          <MagneticButton onClick={() => openBooking()} className="bg-gradient-to-r from-warm-gold to-hot-pink text-white px-6 py-2 rounded-full font-lora text-sm hover:shadow-xl transition-shadow" aria-label="Réserver">
-            Réserver
+          <MagneticButton onClick={() => openBooking()} className="bg-gradient-to-r from-warm-gold to-hot-pink text-white px-6 py-2 rounded-full font-lora text-sm hover:shadow-xl transition-shadow" aria-label="Reserveren">
+            Reserveren
           </MagneticButton>
         </div>
       </motion.nav>
@@ -430,28 +437,28 @@ function App() {
                 ease: [0.22, 1, 0.36, 1]
               }}
             >
-              L'Art{' '}
+              De{' '}
               <span className="bg-gradient-to-r from-warm-gold to-hot-pink bg-clip-text text-transparent animate-gradient">
-                Absolu
+                Absolute
               </span>
               <br />
-              de la Beauté
+              Kunst van Schoonheid
             </motion.h1>
 
             <p className="text-lg md:text-xl text-matte-black/80 mb-8 leading-relaxed">
-              Sublimez votre regard avec nos extensions de cils sur mesure.
-              Chaque regard mérite une touche de <span className="font-semibold text-hot-pink">luxe absolu</span>.
+              Verfraai uw blik met onze op maat gemaakte wimperextensions.
+              Elke blik verdient een vleugje <span className="font-semibold text-hot-pink">absolute luxe</span>.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <CTAButton variant="primary" className="px-8 py-4 rounded-full text-lg flex items-center justify-center gap-2 relative overflow-hidden" onClick={() => scrollTo('services')} aria-label="Découvrir nos Services">
+              <CTAButton variant="primary" className="px-8 py-4 rounded-full text-lg flex items-center justify-center gap-2 relative overflow-hidden" onClick={() => scrollTo('services')} aria-label="Ontdek onze Diensten">
                 <Star size={20} fill="currentColor" />
-                Découvrir nos Services
+                Ontdek onze Diensten
                 <motion.div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent" initial={{ x: '-100%' }} whileHover={{ x: '100%' }} transition={{ duration: 0.6 }} />
               </CTAButton>
 
-              <CTAButton variant="ghost" className="px-8 py-4 rounded-full text-lg" onClick={() => scrollTo('galerie')} aria-label="Voir la Galerie">
-                Voir la Galerie
+              <CTAButton variant="ghost" className="px-8 py-4 rounded-full text-lg" onClick={() => scrollTo('galerie')} aria-label="Bekijk de Galerij">
+                Bekijk de Galerij
               </CTAButton>
             </div>
 
@@ -472,7 +479,7 @@ function App() {
                 transition={{ duration: 0.5, delay: 0.7 }}
               >
                 <div className="font-playfair text-3xl font-bold text-warm-gold">50+</div>
-                <div className="text-sm text-matte-black/70">Clientes Satisfaites</div>
+                <div className="text-sm text-matte-black/70">Tevreden Klanten</div>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -480,7 +487,7 @@ function App() {
                 transition={{ duration: 0.5, delay: 0.8 }}
               >
                 <div className="font-playfair text-3xl font-bold text-hot-pink">2+</div>
-                <div className="text-sm text-matte-black/70">Ans d'Expérience</div>
+                <div className="text-sm text-matte-black/70">Jaar Ervaring</div>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -488,7 +495,7 @@ function App() {
                 transition={{ duration: 0.5, delay: 0.9 }}
               >
                 <div className="font-playfair text-3xl font-bold text-warm-gold">100%</div>
-                <div className="text-sm text-matte-black/70">Naturel & Sûr</div>
+                <div className="text-sm text-matte-black/70">Natuurlijk & Veilig</div>
               </motion.div>
             </motion.div>
           </motion.div>
@@ -535,14 +542,14 @@ function App() {
             className="text-center mb-12"
           >
             <h2 className="font-playfair text-4xl md:text-6xl font-bold mb-4">
-              Transformations{' '}
+              Spectaculaire{' '}
               <span className="bg-gradient-to-r from-warm-gold to-hot-pink bg-clip-text text-transparent">
-                Spectaculaires
+                Transformaties
               </span>
             </h2>
             <p className="text-lg text-matte-black/70 max-w-2xl mx-auto">
-              Découvrez le pouvoir transformateur de nos extensions de cils.
-              Glissez pour révéler la magie.
+              Ontdek de transformerende kracht van onze wimperextensions.
+              Swipe om de magie te onthullen.
             </p>
           </motion.div>
 
@@ -577,13 +584,14 @@ function App() {
             className="text-center mb-16"
           >
             <h2 className="font-playfair text-4xl md:text-6xl font-bold mb-4">
-              Nos Collections{' '}
+              Onze{' '}
               <span className="bg-gradient-to-r from-warm-gold to-hot-pink bg-clip-text text-transparent">
-                Exclusives
+                Exclusieve
               </span>
+              {' '}Collecties
             </h2>
             <p className="text-lg text-matte-black/70 max-w-2xl mx-auto">
-              Chaque technique est une œuvre d'art, adaptée à votre style unique.
+              Elke techniek is een kunstwerk, aangepast aan uw unieke stijl.
             </p>
           </motion.div>
 
@@ -603,7 +611,7 @@ function App() {
              >
               <div className="h-64 overflow-hidden">
                 <motion.img
-                  src="/lashbrows.png"
+                  src={lashBrowsImg}
                   alt="Look Naturel"
                   className="w-full h-full object-cover"
                   whileHover={{ scale: 1.15 }}
@@ -619,11 +627,11 @@ function App() {
                   Brows & Lashes
                 </motion.h3>
                 <p className="text-matte-black/70 mb-4">
-                  Des extensions délicates qui subliment naturellement votre regard sans artifice.
+                  Delicate extensions die uw blik op natuurlijke wijze verfijnen zonder kunstmatigheid.
                 </p>
                 <div className="flex items-center justify-between">
                   <motion.span className="font-playfair text-2xl font-bold text-warm-gold">120€</motion.span>
-                  <CTAButton variant="solidDark" className="px-6 py-2 rounded-full text-sm" onClick={() => openBooking('Look Naturel')}>Choisir</CTAButton>
+                  <CTAButton variant="solidDark" className="px-6 py-2 rounded-full text-sm" onClick={() => openBooking('Natuurlijke Look')}>Kiezen</CTAButton>
                   </div>
                </div>
              </motion.div>
@@ -661,7 +669,7 @@ function App() {
               </motion.div>
               <div className="h-64 overflow-hidden">
                 <motion.img
-                  src="/lashext.png"
+                  src={lashExtImg}
                   alt="Volume Russe"
                   className="w-full h-full object-cover"
                   whileHover={{ scale: 1.15 }}
@@ -677,11 +685,11 @@ function App() {
                   Lash extensions
                 </motion.h3>
                 <p className="text-matte-black/70 mb-4">
-                  La technique premium pour un regard intense et glamour. Notre signature.
+                  De premium techniek voor een intense en glamoureuze blik. Onze signature.
                 </p>
                 <div className="flex items-center justify-between">
                   <motion.span className="font-playfair text-2xl font-bold bg-gradient-to-r from-warm-gold to-hot-pink bg-clip-text text-transparent">180€</motion.span>
-                  <CTAButton variant="primary" className="px-6 py-2 rounded-full text-sm" onClick={() => openBooking('Lash extensions')}>Choisir</CTAButton>
+                  <CTAButton variant="primary" className="px-6 py-2 rounded-full text-sm" onClick={() => openBooking('Lash extensions')}>Kiezen</CTAButton>
                   </div>
                </div>
              </motion.div>
@@ -701,7 +709,7 @@ function App() {
              >
               <div className="h-64 overflow-hidden">
                 <motion.img
-                  src="/lashlift.png"
+                  src={lashLiftImg}
                   alt="Mega Volume"
                   className="w-full h-full object-cover"
                   whileHover={{ scale: 1.15 }}
@@ -717,12 +725,12 @@ function App() {
                   Lash Lift
                 </motion.h3>
                 <p className="text-matte-black/70 mb-4">
-                  L'expérience ultime pour un regard spectaculaire et inoubliable.
+                  De ultieme ervaring voor een spectaculaire en onvergetelijke blik.
                 </p>
                 <div className="flex items-center justify-between">
                   <motion.span className="font-playfair text-2xl font-bold text-hot-pink">220€</motion.span>
                   <CTAButton variant="solidDark" className="px-6 py-2 rounded-full text-sm" style={{backgroundColor:'#111827'}} onClick={() => openBooking('Lash Lift')}>
-                    Choisir
+                    Kiezen
                   </CTAButton>
                    </div>
                </div>
@@ -747,22 +755,22 @@ function App() {
             className="text-center mb-12"
           >
             <h2 className="font-playfair text-4xl md:text-6xl font-bold mb-4">
-              Notre{' '}
+              Onze{' '}
               <span className="bg-gradient-to-r from-warm-gold to-hot-pink bg-clip-text text-transparent">
-                Galerie
+                Galerij
               </span>
             </h2>
             <p className="text-lg text-matte-black/70">
-              Chaque création raconte une histoire unique
+              Elke creatie vertelt een uniek verhaal
             </p>
           </motion.div>
 
           <div className="grid grid-cols-2 gap-4 md:gap-6">
             {[
-              '/logo.png',
-              '/lashext.png',
-              '/lashlift.png',
-              '/lashbrows.png',
+              logoImg,
+              lashExtImg,
+              lashLiftImg,
+              lashBrowsImg,
             ].map((src, index) => (
               <motion.div
                 key={index}
@@ -782,7 +790,7 @@ function App() {
               >
                 <motion.img
                   src={src}
-                  alt={`Galerie ${index + 1}`}
+                  alt={`Galerij ${index + 1}`}
                   className="w-full h-64 md:h-80 object-cover"
                 />
                 <motion.div
@@ -804,14 +812,13 @@ function App() {
             {/* Logo et Description */}
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <Sparkles className="text-warm-gold" size={28} />
                 <span className="font-playfair text-3xl font-bold text-warm-gold">
                   Lashi By Hasi
                 </span>
               </div>
               <p className="text-white/70 leading-relaxed">
-                Votre destination de luxe pour des extensions de cils d'exception.
-                Sublimez votre beauté naturelle avec notre expertise unique.
+                Uw luxe bestemming voor uitzonderlijke wimperextensions.
+                Verfraai uw natuurlijke schoonheid met onze unieke expertise.
               </p>
             </div>
 
@@ -832,7 +839,7 @@ function App() {
 
             {/* Réseaux Sociaux */}
             <div>
-              <h3 className="font-playfair text-xl font-bold mb-4 text-warm-gold">Suivez-nous</h3>
+              <h3 className="font-playfair text-xl font-bold mb-4 text-warm-gold">Volg ons</h3>
               <div className="flex gap-4">
                 <a href="https://www.instagram.com/lashi_byhasi/">
                     <CTAButton variant="icon" className="p-3 rounded-full">
@@ -842,11 +849,11 @@ function App() {
                </div>
 
               <div className="mt-8">
-                <h4 className="font-playfair text-lg mb-3">Horaires</h4>
+                <h4 className="font-playfair text-lg mb-3">Openingstijden</h4>
                 <div className="text-white/70 text-sm space-y-1">
-                  <p>Lun - Ven: 9h - 19h</p>
-                  <p>Sam: 10h - 18h</p>
-                  <p>Dim: Fermé</p>
+                  <p>Ma - Vr: 9u - 19u</p>
+                  <p>Za: 10u - 18u</p>
+                  <p>Zo: Gesloten</p>
                 </div>
               </div>
             </div>
@@ -854,7 +861,7 @@ function App() {
 
           {/* Copyright */}
           <div className="border-t border-white/10 pt-8 text-center text-white/50 text-sm">
-            <p>© 2025 Lashi By Hasi. Tous droits réservés. Créé avec passion pour sublimer votre beauté.</p>
+            <p>© 2025 Lashi By Hasi. Alle rechten voorbehouden. Gemaakt met passie om uw schoonheid te verfijnen.</p>
           </div>
         </div>
       </footer>
