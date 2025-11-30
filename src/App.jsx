@@ -3,12 +3,12 @@ import { motion, useSpring, useTransform } from 'framer-motion';
 import { Star, Instagram, Phone, MapPin } from 'lucide-react';
 
 // Import des images depuis public/
-import imgAvant from '/img.png';
-import imgApres from '/img_1.png';
-import logoImg from '/logo.png';
-import lashExtImg from '/lashext.png';
-import lashLiftImg from '/lashlift.png';
-import lashBrowsImg from '/lashbrows.png';
+import imgAvant from '../public/img.png';
+import imgApres from '../public/img_1.png';
+import logoImg from '../public/logo.png';
+import lashExtImg from '../public/lashext.png';
+import lashLiftImg from '../public/lashlift.png';
+import lashBrowsImg from '../public/lashbrows.png';
 
 // ============================================
 // COMPOSANT: MagneticButton
